@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Coach Shu">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#090b10">
+<title>My Coach Shu</title>
+<style>
+
+:root{--bg:#090b10;--surface:#121720;--ink:#f3f5f8;--muted:#929baa;--line:#252d39;--purple:#a78bfa;--purple2:#28213d;--green:#42e6a4;--orange:#ffb454;--red:#ff667a;--shadow:0 10px 30px rgba(0,0,0,.28)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 50% -10%,#20263a 0%,var(--bg) 48%);color:var(--ink);font:15px/1.48 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.app{max-width:760px;margin:0 auto;min-height:100vh;padding-bottom:calc(86px + env(safe-area-inset-bottom))}
+.top{padding:22px 18px 18px;background:linear-gradient(135deg,#171d2a,#29203d 62%,#171b27);color:#fff;border-bottom:1px solid #39334c;border-radius:0 0 24px 24px;box-shadow:0 12px 35px #0008}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:12px}.eyebrow{font-size:10px;letter-spacing:2px;font-weight:850;color:#c4b5fd}.top h1{font-size:25px;line-height:1.15;margin:6px 0}.top p{font-size:12px;margin:0;color:#c0c6d2}
+.topbutton{border:1px solid #655b7e;background:#ffffff0c;color:#fff;border-radius:12px;padding:9px 11px;font-size:12px;font-weight:800}
+main{padding:16px 14px 20px}.view{display:none}.view.active{display:block}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:7px 2px 12px}.sectionhead h2{font-size:17px;margin:0;letter-spacing:.1px}.muted{color:var(--muted)}.tiny{font-size:11px;color:var(--muted)}
+.card{background:linear-gradient(145deg,#151c27,#111720);border:1px solid var(--line);border-radius:18px;padding:15px;box-shadow:var(--shadow);margin-bottom:12px}
+.hero-card{background:linear-gradient(135deg,#1c2432,#241d35);border:1px solid #45405b;border-radius:20px;padding:18px;margin-top:-1px;box-shadow:var(--shadow)}
+.kicker{font-size:11px;color:#b4bdca;font-weight:800;letter-spacing:1px}.bigweight{font-size:42px;font-weight:900;letter-spacing:-1.8px;line-height:1.1;margin:5px 0;color:#fff}.unit{font-size:15px;font-weight:700;letter-spacing:0;color:#aeb8c7}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:99px;background:#202c35;color:#b9f7dc;font-size:11px;font-weight:850;border:1px solid #35614f}
+.progress{height:9px;background:#303744;border-radius:20px;overflow:hidden;margin:10px 0 6px}.progress span{display:block;height:100%;background:linear-gradient(90deg,#8b5cf6,#42e6a4);border-radius:20px}
+.progressmeta{display:flex;justify-content:space-between;font-size:11px;color:#aeb8c7}
+.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.metric{background:#121923;border:1px solid var(--line);border-radius:16px;padding:13px;min-width:0}.metric .label{font-size:11px;color:#a0aaba}.metric .value{font-size:23px;font-weight:900;margin-top:3px;color:#fff}.metric .foot{font-size:10px;color:var(--muted);margin-top:1px}.positive{color:var(--green)}.caution{color:var(--orange)}
+.btn{border:1px solid #9b7af5;background:linear-gradient(135deg,#8b5cf6,#287d60);color:#fff;border-radius:13px;padding:12px 15px;font-weight:850;min-height:44px;box-shadow:0 5px 16px #5b35b533}.btn.light{background:#252038;color:#d8caff;border-color:#51416e}.btn.ghost{background:#1a222d;color:var(--ink);border-color:#303b4a}.btn.danger{background:#3a1e29;color:#ff9eaa;border-color:#713444}.btn.full{width:100%}.btn.small{padding:8px 11px;min-height:36px;font-size:12px}
+.quickrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.rowstart{display:flex;align-items:center;gap:10px}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;background:var(--purple);margin-right:5px}.dot.orange{background:var(--orange)}.dot.green{background:var(--green)}
+.chartbox{width:100%;overflow:hidden}.chart{width:100%;height:205px;display:block}.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin:5px 0 0}
+.fieldgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.field{min-width:0;display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}label{font-size:11px;color:#aab4c3;font-weight:850;letter-spacing:.5px}
+input,select,textarea{width:100%;min-width:0;border:1px solid #354052;background:#0d131c;color:#f3f5f8;border-radius:12px;padding:12px 11px;min-height:45px;outline:none;font-size:16px}input:focus,select:focus,textarea:focus{border-color:#a78bfa;box-shadow:0 0 0 3px #8b5cf633}input::placeholder,textarea::placeholder{color:#657184}input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1)}textarea{min-height:75px;resize:vertical}
+.formsection{padding:14px 0;border-top:1px solid var(--line)}.formsection:first-of-type{border-top:0;padding-top:0}.formsection h3{font-size:13px;margin:0 0 11px;color:#e7eaf0}.help{font-size:11px;color:var(--muted);margin:8px 0 0}
+details{border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:12px;background:#101721}summary{font-weight:850;font-size:12px;cursor:pointer;color:#c4b5fd}details .fieldgrid{margin-top:12px}
+.records{display:flex;flex-direction:column;gap:9px}.record{background:#121923;border:1px solid var(--line);border-radius:15px;padding:13px}.record .date{font-size:11px;color:var(--muted)}.record .wt{font-size:21px;font-weight:900;color:#fff}.recordmeta{display:flex;flex-wrap:wrap;gap:7px;margin-top:7px}.tag{font-size:10px;background:#252038;color:#d3c4ff;padding:4px 7px;border-radius:8px}
+.nav{position:fixed;z-index:10;bottom:0;left:0;right:0;background:#0c1119ed;backdrop-filter:blur(16px);border-top:1px solid #293241;padding:7px 7px calc(7px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(5,1fr);max-width:760px;margin:0 auto}
+.nav button{border:0;background:transparent;color:#758195;font-size:10px;font-weight:800;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:3px;min-height:48px}.nav button .ico{font-size:19px;line-height:1}.nav button.active{color:#c4b5fd}
+.notice{background:#1b2330;border:1px solid #303b4b;border-radius:13px;padding:12px;font-size:11px;color:#b9c3d1;margin-top:12px}.empty{text-align:center;color:var(--muted);padding:25px 12px;font-size:13px}
+.hidden{display:none!important}.twoactions{display:flex;gap:8px;flex-wrap:wrap}.twoactions>*{flex:1}hr{border:0;border-top:1px solid var(--line);margin:13px 0}
+#view-coach .card:first-of-type{background:linear-gradient(145deg,#241b36,#151b27);border-color:#66508c;box-shadow:0 10px 35px #0006}#coachTitle{font-size:20px;line-height:1.25;color:#fff}#coachMessage{color:#d7dce5!important;line-height:1.65!important}#coachFocus{color:#c6ced9}
+@media(min-width:600px){main{padding:20px}.metrics{grid-template-columns:repeat(4,minmax(0,1fr))}.top{padding:24px 22px}.bigweight{font-size:46px}}
+@media(max-width:360px){.fieldgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.bigweight{font-size:36px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="topline"><div><div class="eyebrow">THE STANDARD IS CONSISTENCY</div><h1>💜 Coach Shu</h1><p>No excuses. No panic. Just receipts and results.</p></div><div style="display:flex;gap:7px"><button class="topbutton" id="installApp" hidden>Install app ⤓</button><button class="topbutton" id="backupTop">Backup ↗</button></div></div>
+</header>
+<main>
+<section class="view active" id="view-home">
+ <div class="hero-card">
+  <div class="row"><span class="kicker">LATEST WEIGHT</span><span class="pill" id="latestDate">11 Nov 2026</span></div>
+  <div class="bigweight" id="latestWeight">72.4 <span class="unit">kg</span></div>
+  <div class="row"><span class="tiny" id="changeText">−2.5 kg from starting scan</span><span class="tiny" id="targetText">Target 65 kg</span></div>
+  <div class="progress"><span id="goalBar" style="width:0%"></span></div>
+  <div class="progressmeta"><span id="startText">Start 74.9 kg</span><span id="remainingText">7.4 kg to go</span></div>
+ </div>
+ <div class="metrics">
+  <div class="metric"><div class="label">Fat mass · latest scan</div><div class="value" id="fatMetric">34.3 kg</div><div class="foot" id="fatChange">−1.1 kg from first scan</div></div>
+  <div class="metric"><div class="label">Muscle mass · latest scan</div><div class="value" id="muscleMetric">35.5 kg</div><div class="foot">BIA estimate; hydration affects it</div></div>
+  <div class="metric"><div class="label">Current dose setting</div><div class="value" id="doseMetric">2.5 mg</div><div class="foot">Record only; follow prescriber</div></div>
+  <div class="metric"><div class="label">Latest body fat</div><div class="value" id="bfMetric">47.4%</div><div class="foot" id="visceralMetric">Visceral fat grade 15</div></div>
+ </div>
+ <div class="quickrow"><button class="btn" data-go="log">＋ Add today's log</button><button class="btn light" data-go="trends">View my trends ↗</button></div>
+ <div class="sectionhead"><h2>Recent check-ins</h2><span class="tiny">Latest 3</span></div>
+ <div id="homeRecent" class="records"></div>
+ <div class="notice">💡 Daily weight can fluctuate. Compare weekly trends and body scans taken under similar conditions. BIA body-composition values are estimates, not direct measurements of fat or muscle tissue.</div>
+</section>
+
+<section class="view" id="view-log">
+ <div class="sectionhead"><h2 id="formTitle">Daily check-in</h2><span class="tiny">Usually 1–2 minutes</span></div>
+ <form id="entryForm" class="card">
+  <div class="formsection">
+   <h3>⚖️ Weight & daily basics</h3>
+   <div class="fieldgrid">
+    <div class="field"><label for="date">DATE *</label><input id="date" type="date" required></div>
+    <div class="field"><label for="weight">MORNING WEIGHT (kg) *</label><input id="weight" type="number" min="25" max="300" step=".01" placeholder="e.g. 72.4" required></div>
+    <div class="field"><label for="waterIntake">WATER INTAKE (ml)</label><input id="waterIntake" type="number" min="0" max="10000" step="50" placeholder="e.g. 2000"></div>
+    <div class="field"><label for="steps">STEPS</label><input id="steps" type="number" min="0" max="100000" placeholder="e.g. 5000"></div>
+   </div>
+  </div>
+  <div class="formsection">
+   <h3>🥗 Food & appetite</h3>
+   <div class="fieldgrid">
+    <div class="field"><label for="calories">CALORIES EATEN (kcal)</label><input id="calories" type="number" min="0" max="10000" placeholder="Optional"></div>
+    <div class="field"><label for="protein">PROTEIN (g)</label><input id="protein" type="number" min="0" max="500" placeholder="Optional"></div>
+    <div class="field"><label for="hunger">HUNGER TODAY</label><select id="hunger"><option value="">Choose</option><option>Very low</option><option>Low</option><option>Moderate</option><option>High</option><option>Very high</option></select></div>
+    <div class="field"><label for="foodAmount">FOOD INTAKE</label><select id="foodAmount"><option value="">Choose</option><option>Less than usual</option><option>About usual</option><option>More than usual</option></select></div>
+    <div class="field full"><label for="meals">MEALS / FOOD NOTES</label><textarea id="meals" placeholder="Breakfast, lunch, dinner or anything you want to remember"></textarea></div>
+   </div>
+  </div>
+  <div class="formsection">
+   <h3>🏃 Activity</h3>
+   <div class="fieldgrid">
+    <div class="field"><label for="exercise">ACTIVITY</label><select id="exercise"><option value="">Choose</option><option>Rest day</option><option>Walking</option><option>Treadmill</option><option>Strength training</option><option>Walking + strength</option><option>Cycling</option><option>Other</option></select></div>
+    <div class="field"><label for="minutes">DURATION (minutes)</label><input id="minutes" type="number" min="0" max="600" placeholder="e.g. 30"></div>
+    <div class="field"><label for="activeCalories">ACTIVE CALORIES (kcal)</label><input id="activeCalories" type="number" min="0" max="5000" placeholder="From watch / machine"></div><div class="field"><label for="energy">ENERGY</label><select id="energy"><option value="">Choose</option><option>Great</option><option>Good</option><option>Okay</option><option>Low</option><option>Exhausted</option></select></div>
+   </div>
+  </div>
+  <div class="formsection">
+   <h3>💉 Injection & how you feel</h3>
+   <div class="fieldgrid">
+    <div class="field"><label for="dose">INJECTION DOSE</label><select id="dose"><option value="">No injection today</option><option>2.5 mg</option><option>5 mg</option><option>7.5 mg</option><option>10 mg</option><option>12.5 mg</option><option>15 mg</option></select></div>
+    <div class="field"><label for="site">INJECTION SITE</label><select id="site"><option value="">Not applicable</option><option>Abdomen</option><option>Thigh</option><option>Upper arm</option></select></div>
+    <div class="field"><label for="sideEffect">SIDE EFFECT</label><select id="sideEffect"><option>None</option><option>Nausea</option><option>Constipation</option><option>Diarrhoea</option><option>Vomiting</option><option>Reflux / indigestion</option><option>Dizziness</option><option>Fatigue</option><option>Other</option></select></div>
+    <div class="field"><label for="severity">SYMPTOM SEVERITY</label><select id="severity"><option value="">Not applicable</option><option>Mild</option><option>Moderate</option><option>Severe</option></select></div>
+    <div class="field full"><label for="notes">NOTES / OTHER SYMPTOMS</label><textarea id="notes" placeholder="Hunger, nausea, energy, bowel changes, mood, etc."></textarea></div>
+   </div>
+  </div>
+  <details>
+   <summary>＋ Body composition scan (only on scan days)</summary>
+   <p class="help">Leave blank on normal days. Enter values exactly as shown on your Fitdays report.</p>
+   <div class="fieldgrid">
+    <div class="field"><label for="fat">FAT MASS (kg)</label><input id="fat" type="number" min="0" max="200" step=".1" placeholder="e.g. 34.3"></div>
+    <div class="field"><label for="muscle">MUSCLE MASS (kg)</label><input id="muscle" type="number" min="0" max="200" step=".1" placeholder="e.g. 35.5"></div>
+    <div class="field"><label for="skeletal">SKELETAL MUSCLE (kg)</label><input id="skeletal" type="number" min="0" max="100" step=".1" placeholder="e.g. 20.6"></div>
+    <div class="field"><label for="water">WATER WEIGHT (kg)</label><input id="water" type="number" min="0" max="200" step=".1" placeholder="e.g. 27.9"></div>
+    <div class="field"><label for="bodyfat">BODY FAT (%)</label><input id="bodyfat" type="number" min="0" max="100" step=".1" placeholder="e.g. 47.4"></div>
+    <div class="field"><label for="visceral">VISCERAL FAT GRADE</label><input id="visceral" type="number" min="0" max="99" step="1" placeholder="e.g. 15"></div>
+    <div class="field"><label for="waist">WAIST (cm)</label><input id="waist" type="number" min="20" max="250" step=".1" placeholder="Optional"></div>
+    <div class="field"><label for="hip">HIP (cm)</label><input id="hip" type="number" min="20" max="250" step=".1" placeholder="Optional"></div>
+   </div>
+   <details><summary>Advanced: segmental fat & muscle (kg)</summary>
+    <div class="fieldgrid">
+     <div class="field"><label for="fatArmL">LEFT ARM FAT</label><input id="fatArmL" type="number" step=".1" placeholder="kg"></div>
+     <div class="field"><label for="fatArmR">RIGHT ARM FAT</label><input id="fatArmR" type="number" step=".1" placeholder="kg"></div>
+     <div class="field"><label for="fatTrunk">TRUNK FAT</label><input id="fatTrunk" type="number" step=".1" placeholder="kg"></div>
+     <div class="field"><label for="fatLegL">LEFT LEG FAT</label><input id="fatLegL" type="number" step=".1" placeholder="kg"></div>
+     <div class="field"><label for="fatLegR">RIGHT LEG FAT</label><input id="fatLegR" type="number" step=".1" placeholder="kg"></div>
+     <div class="field"><label for="muscleArmL">LEFT ARM MUSCLE</label><input id="muscleArmL" type="number" step=".1" placeholder="kg"></div>
+     <div class="field"><label for="muscleArmR">RIGHT ARM MUSCLE</label><input id="muscleArmR" type="number" step=".1" placeholder="kg"></div>
+     <div class="field"><label for="muscleTrunk">TRUNK MUSCLE</label><input id="muscleTrunk" type="number" step=".1" placeholder="kg"></div>
+     <div class="field"><label for="muscleLegL">LEFT LEG MUSCLE</label><input id="muscleLegL" type="number" step=".1" placeholder="kg"></div>
+     <div class="field"><label for="muscleLegR">RIGHT LEG MUSCLE</label><input id="muscleLegR" type="number" step=".1" placeholder="kg"></div>
+    </div>
+   </details>
+  </details>
+  <div class="twoactions" style="margin-top:14px"><button class="btn" type="submit" id="saveEntry">Save check-in</button><button class="btn light" type="button" id="cancelEdit">Cancel</button></div>
+  <p class="help">Weight and date are the only required fields. You can save once per day and edit that day's entry later.</p>
+ </form>
+</section>
+
+<section class="view" id="view-trends">
+ <div class="sectionhead"><h2>Your progress</h2><span class="tiny">Based on saved entries</span></div>
+ <div class="card">
+  <div class="row"><h3 style="font-size:14px;margin:0">⚖️ Weight trend</h3><span class="tiny">kg</span></div>
+  <div class="chartbox"><svg id="weightChart" class="chart" viewBox="0 0 520 205" role="img" aria-label="Weight trend"></svg></div>
+  <div class="legend"><span><i class="dot"></i>Weight</span><span><i class="dot orange"></i>Target</span></div>
+ </div>
+ <div class="card">
+  <div class="row"><h3 style="font-size:14px;margin:0">Body composition trend</h3><span class="tiny">Scan days only</span></div>
+  <div class="chartbox"><svg id="bodyChart" class="chart" viewBox="0 0 520 205" role="img" aria-label="Fat and muscle mass trend"></svg></div>
+  <div class="legend"><span><i class="dot orange"></i>Fat mass</span><span><i class="dot green"></i>Muscle mass</span></div>
+  <p class="help">Fitdays/BIA readings are estimates and can shift with hydration, meals, exercise and timing. Compare similar scan conditions.</p>
+ </div>
+ <div class="card">
+  <h3 style="font-size:14px;margin:0 0 10px">Goal settings</h3>
+  <div class="fieldgrid">
+   <div class="field"><label for="target">TARGET WEIGHT (kg)</label><input id="target" type="number" min="30" max="200" step=".1" value="65"></div>
+   <div class="field"><label for="currentDose">CURRENT PRESCRIBED DOSE</label><select id="currentDose"><option>2.5 mg</option><option>5 mg</option><option>7.5 mg</option><option>10 mg</option><option>12.5 mg</option><option>15 mg</option></select></div>
+  </div>
+  <button class="btn light full" id="saveSettings" style="margin-top:11px">Save goals</button>
+ </div>
+ <div class="card">
+  <h3 style="font-size:14px;margin:0 0 9px">What to watch</h3>
+  <p class="help" style="margin:0">Look at your 7-day weight trend, appetite, food intake, protein, activity and side effects together. Don't use a single weigh-in or BIA muscle estimate to decide whether your medication dose should change.</p>
+ </div>
+</section>
+
+
+<section class="view" id="view-coach">
+ <div class="sectionhead"><h2>THE COACH'S OFFICE 😈</h2><span class="pill">No-excuses mode</span></div>
+ <div class="card" style="background:#261d31;color:white">
+  <div style="font-size:10px;letter-spacing:1px;color:#cdbbd9;font-weight:800">YOUR PERSONAL COACH REVIEW</div>
+  <h3 id="coachTitle" style="margin:7px 0">Discipline first. Excuses last.</h3>
+  <p id="coachMessage" style="font-size:13px;color:#eee6f3;margin:0">One bad weigh-in is not a crisis. One bad habit repeated is a pattern.</p>
+  <p style="font-size:10px;color:#cdbbd9;margin:12px 0 0">I will support you. I will also call out your nonsense. — COACH SHU</p>
+ </div>
+ <div class="card"><b>YOUR CURRENT FOCUS</b><div id="coachFocus" style="font-size:12px;line-height:1.7;margin-top:8px"></div></div>
+ <div class="card"><b>WEEKLY REFLECTION</b><p class="help">A quick check-in on consistency, not perfection.</p>
+  <div class="fieldgrid">
+   <div class="field"><label>ENERGY</label><select id="weekEnergy"><option>Choose</option><option>Great</option><option>Good</option><option>Mixed</option><option>Low</option></select></div>
+   <div class="field"><label>APPETITE</label><select id="weekAppetite"><option>Choose</option><option>Manageable</option><option>Too hungry</option><option>Very low</option><option>Variable</option></select></div>
+   <div class="field full"><label>ONE WIN</label><textarea id="weekWin" placeholder="What did you do well?"></textarea></div>
+   <div class="field full"><label>ONE THING TO IMPROVE</label><textarea id="weekImprove" placeholder="What will you work on?"></textarea></div>
+  </div><button class="btn light block" id="saveWeek" style="margin-top:10px">Save reflection</button><p class="help" id="weekSaved"></p>
+ </div>
+ <div class="notice">Medication safety: Coach Shu cannot recommend starting, stopping or increasing Mounjaro. Follow your prescriber's plan. Seek urgent medical care for severe or persistent abdominal pain, repeated vomiting/dehydration, allergic reaction or other severe symptoms.</div>
+</section>
+
+<section class="view" id="view-history">
+ <div class="sectionhead"><h2>Journal & records</h2><span class="tiny" id="recordCount">0 entries</span></div>
+ <div class="twoactions" style="margin-bottom:11px"><button class="btn light" id="exportJson">Export backup</button><button class="btn light" id="importBtn">Import backup</button><input class="hidden" type="file" id="importFile" accept=".json,application/json"></div>
+ <div id="recordList" class="records"></div>
+ <div id="historyEmpty" class="empty hidden">No saved check-ins yet. Add your first entry from the Log tab.</div>
+ <div class="notice">Your entries are stored in Safari on this iPhone. Export a backup regularly, especially before changing phones or clearing website data. Importing a backup replaces the records currently in this tracker.</div>
+ <button class="btn danger full" id="clearAll" style="margin-top:12px">Delete all records</button>
+</section>
+</main>
+<nav class="nav" aria-label="Main navigation">
+ <button class="active" data-tab="home"><span class="ico">⌂</span>Home</button>
+ <button data-tab="log"><span class="ico">＋</span>Log</button>
+ <button data-tab="trends"><span class="ico">⌁</span>Trends</button>
+ <button data-tab="coach"><span class="ico">✦</span>Coach</button><button data-tab="history"><span class="ico">▤</span>History</button>
+</nav>
+</div>
+<script>
+const KEY='shu_mounjaro_journey_v2';
+const seed=[
+ {date:'2026-10-28',weight:74.9,fat:35.4,muscle:36.9,skeletal:21.5,water:29,bodyfat:47.2,visceral:16,dose:'2.5 mg',fatArmL:2.5,fatArmR:2.6,fatTrunk:18.5,fatLegL:5.2,fatLegR:5.2,muscleArmL:1.9,muscleArmR:1.9,muscleTrunk:17,muscleLegL:6.3,muscleLegR:6.3,notes:'Baseline Fitdays scan; first 2.5 mg injection recorded.'},
+ {date:'2026-11-04',weight:71.1,fat:34.1,muscle:34.5,skeletal:20,water:27.1,bodyfat:48,visceral:15,dose:'2.5 mg',fatArmL:2.6,fatArmR:2.6,fatTrunk:17.6,fatLegL:5,fatLegR:5,muscleArmL:1.6,muscleArmR:1.6,muscleTrunk:15.9,muscleLegL:5.8,muscleLegR:5.8,notes:'Fitdays scan; second 2.5 mg injection recorded.'},
+ {date:'2026-11-11',weight:72.4,fat:34.3,muscle:35.5,skeletal:20.6,water:27.9,bodyfat:47.4,visceral:15,fatArmL:2.5,fatArmR:2.5,fatTrunk:17.7,fatLegL:5.1,fatLegR:5.1,muscleArmL:1.7,muscleArmR:1.7,muscleTrunk:16.4,muscleLegL:6,muscleLegR:6,notes:'Fitdays body composition scan; injection not assumed.'}
+];
+const $=id=>document.getElementById(id);
+const fields=['date','weight','waterIntake','steps','calories','protein','hunger','foodAmount','meals','exercise','minutes','activeCalories','energy','dose','site','sideEffect','severity','notes','fat','muscle','skeletal','water','bodyfat','visceral','waist','hip','fatArmL','fatArmR','fatTrunk','fatLegL','fatLegR','muscleArmL','muscleArmR','muscleTrunk','muscleLegL','muscleLegR'];
+let data=[],settings={target:65,dose:'2.5 mg'},editingDate=null;
+try{const s=localStorage.getItem(KEY);data=s?JSON.parse(s):seed.slice()}catch(e){data=seed.slice()}
+try{settings={...settings,...JSON.parse(localStorage.getItem(KEY+'_settings')||'{}')}}catch(e){}
+const n=v=>v===''||v===null||v===undefined?null:Number(v);
+const f=v=>v==null||!Number.isFinite(Number(v))?'—':Number(v).toFixed(1);
+function localDate(){const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
+function niceDate(s){if(!s)return'';return new Date(s+'T12:00:00').toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(data));localStorage.setItem(KEY+'_settings',JSON.stringify(settings));}catch(e){alert('Could not save. Please export a backup and check browser storage.')}render();if(typeof coachReview==='function')coachReview()}
+function latest(){return [...data].filter(x=>Number.isFinite(x.weight)).sort((a,b)=>a.date.localeCompare(b.date)).at(-1)}
+function scans(){return [...data].filter(x=>x.fat!=null||x.muscle!=null||x.bodyfat!=null).sort((a,b)=>a.date.localeCompare(b.date))}
+function render(){
+ data.sort((a,b)=>a.date.localeCompare(b.date));
+ const valid=data.filter(x=>Number.isFinite(x.weight)).sort((a,b)=>a.date.localeCompare(b.date)),first=valid[0],last=valid.at(-1),scan=scans().at(-1),firstScan=scans()[0];
+ $('latestWeight').innerHTML=last?`${f(last.weight)} <span class="unit">kg</span>`:'—';
+ $('latestDate').textContent=last?niceDate(last.date):'No entry';
+ const delta=first&&last?last.weight-first.weight:null;
+ $('changeText').textContent=delta===null?'Add your first check-in':`${delta<=0?'−':'+'}${f(Math.abs(delta))} kg from first entry`;
+ $('targetText').textContent=`Target ${f(settings.target)} kg`;
+ $('startText').textContent=first?`Start ${f(first.weight)} kg`:'Start —';
+ const remain=last?last.weight-settings.target:null;
+ $('remainingText').textContent=remain===null?'Set a target':remain>0?`${f(remain)} kg to go`:`${f(Math.abs(remain))} kg below target`;
+ let pct=first&&last&&first.weight!==settings.target?((first.weight-last.weight)/(first.weight-settings.target))*100:0;
+ $('goalBar').style.width=Math.max(0,Math.min(100,pct))+'%';
+ $('fatMetric').textContent=scan?`${f(scan.fat)} kg`:'—';
+ $('muscleMetric').textContent=scan?`${f(scan.muscle)} kg`:'—';
+ $('bfMetric').textContent=scan&&scan.bodyfat!=null?`${f(scan.bodyfat)}%`:'—';
+ $('visceralMetric').textContent=scan&&scan.visceral!=null?`Visceral fat grade ${scan.visceral}`:'Latest scan';
+ $('doseMetric').textContent=settings.dose;
+ $('fatChange').textContent=firstScan&&scan&&firstScan.fat!=null&&scan.fat!=null?`${scan.fat-firstScan.fat<=0?'−':'+'}${f(Math.abs(scan.fat-firstScan.fat))} kg from first scan`:'Scan to compare';
+ $('homeRecent').innerHTML='';
+ [...valid].reverse().slice(0,3).forEach(x=>$('homeRecent').appendChild(recordCard(x,false)));
+ $('recordList').innerHTML='';
+ [...data].reverse().forEach(x=>$('recordList').appendChild(recordCard(x,true)));
+ $('recordCount').textContent=`${data.length} ${data.length===1?'entry':'entries'}`;
+ $('historyEmpty').classList.toggle('hidden',data.length>0);
+ $('target').value=settings.target;$('currentDose').value=settings.dose;
+ drawLine($('weightChart'),valid.map(x=>({date:x.date,value:x.weight})),settings.target);
+ const ss=scans();
+ drawMulti($('bodyChart'),[{label:'Fat mass',color:'#c27a42',rows:ss.filter(x=>x.fat!=null).map(x=>({date:x.date,value:x.fat}))},{label:'Muscle mass',color:'#16845b',rows:ss.filter(x=>x.muscle!=null).map(x=>({date:x.date,value:x.muscle}))}]);
+}
+function recordCard(x,actions){
+ const d=document.createElement('article');d.className='record';
+ const top=document.createElement('div');top.className='row';
+ const left=document.createElement('div');left.innerHTML=`<div class="date">${niceDate(x.date)}</div><div class="wt">${f(x.weight)} kg</div>`;
+ top.appendChild(left);
+ if(actions){const b=document.createElement('button');b.className='btn light small';b.textContent='Edit';b.onclick=()=>editEntry(x);top.appendChild(b)}
+ d.appendChild(top);
+ const tags=[];
+ if(x.calories!=null)tags.push(`${x.calories} kcal eaten`);
+ if(x.protein!=null)tags.push(`${x.protein} g protein`);
+ if(x.exercise)tags.push(x.exercise+(x.minutes?` · ${x.minutes} min`:''));
+ if(x.dose)tags.push(`Injection ${x.dose}`);
+ if(x.fat!=null)tags.push(`Fat ${f(x.fat)} kg`);
+ if(x.sideEffect&&x.sideEffect!=='None')tags.push(x.sideEffect);
+ if(tags.length){const m=document.createElement('div');m.className='recordmeta';tags.forEach(t=>{const s=document.createElement('span');s.className='tag';s.textContent=t;m.appendChild(s)});d.appendChild(m)}
+ if(actions){const del=document.createElement('button');del.className='btn ghost small';del.style.marginTop='9px';del.textContent='Delete entry';del.onclick=()=>{if(confirm(`Delete the entry for ${niceDate(x.date)}?`)){data=data.filter(y=>y.date!==x.date);persist()}};d.appendChild(del)}
+ return d;
+}
+function drawLine(svg,rows,target){
+ const ns='http://www.w3.org/2000/svg';svg.innerHTML='';
+ const add=(tag,a,t)=>{const e=document.createElementNS(ns,tag);Object.entries(a).forEach(([k,v])=>e.setAttribute(k,v));if(t)e.textContent=t;svg.appendChild(e)};
+ if(!rows.length){add('text',{x:260,y:105,'text-anchor':'middle',fill:'#817b8b','font-size':13},'Add weights to see your trend');return}
+ const vals=rows.map(x=>x.value).concat(Number(target)||[]),lo=Math.floor(Math.min(...vals)-.5),hi=Math.ceil(Math.max(...vals)+.5),X=i=>35+(rows.length===1?225:i*450/(rows.length-1)),Y=v=>175-(v-lo)/(hi-lo||1)*135;
+ for(let j=0;j<=4;j++){const v=lo+(hi-lo)*j/4,y=Y(v);add('line',{x1:35,y1:y,x2:495,y2:y,stroke:'#eee8f2'});add('text',{x:29,y:y+4,'text-anchor':'end','font-size':10,fill:'#817b8b'},v.toFixed(1))}
+ if(Number.isFinite(Number(target))){const y=Y(Number(target));add('line',{x1:35,y1:y,x2:495,y2:y,stroke:'#c27a42','stroke-width':2,'stroke-dasharray':'5 4'})}
+ if(rows.length>1)add('polyline',{points:rows.map((r,i)=>`${X(i)},${Y(r.value)}`).join(' '),fill:'none',stroke:'#725b86','stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round'});
+ rows.forEach((r,i)=>{add('circle',{cx:X(i),cy:Y(r.value),r:4.5,fill:'#725b86',stroke:'#fff','stroke-width':2});if(i===0||i===rows.length-1||rows.length<=6)add('text',{x:X(i),y:197,'text-anchor':'middle','font-size':10,fill:'#817b8b'},r.date.slice(5))});
+}
+function drawMulti(svg,series){
+ const ns='http://www.w3.org/2000/svg';svg.innerHTML='';const add=(tag,a,t)=>{const e=document.createElementNS(ns,tag);Object.entries(a).forEach(([k,v])=>e.setAttribute(k,v));if(t)e.textContent=t;svg.appendChild(e)};
+ const rows=series.flatMap(s=>s.rows);if(!rows.length){add('text',{x:260,y:105,'text-anchor':'middle',fill:'#817b8b','font-size':13},'Add a body scan to see composition trends');return}
+ const lo=Math.floor(Math.min(...rows.map(r=>r.value))-1),hi=Math.ceil(Math.max(...rows.map(r=>r.value))+1),dates=[...new Set(rows.map(r=>r.date))].sort(),X=i=>35+(dates.length===1?225:i*450/(dates.length-1)),Y=v=>175-(v-lo)/(hi-lo||1)*135;
+ for(let j=0;j<=4;j++){const v=lo+(hi-lo)*j/4,y=Y(v);add('line',{x1:35,y1:y,x2:495,y2:y,stroke:'#eee8f2'});add('text',{x:29,y:y+4,'text-anchor':'end','font-size':10,fill:'#817b8b'},v.toFixed(1))}
+ series.forEach(s=>{const pts=s.rows.map(r=>`${X(dates.indexOf(r.date))},${Y(r.value)}`).join(' ');if(s.rows.length>1)add('polyline',{points:pts,fill:'none',stroke:s.color,'stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round'});s.rows.forEach(r=>add('circle',{cx:X(dates.indexOf(r.date)),cy:Y(r.value),r:4.5,fill:s.color,stroke:'#fff','stroke-width':2}))});
+ dates.forEach((d,i)=>{if(i===0||i===dates.length-1||dates.length<=6)add('text',{x:X(i),y:197,'text-anchor':'middle','font-size':10,fill:'#817b8b'},d.slice(5))});
+}
+function switchTab(name){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+name));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));window.scrollTo({top:0,behavior:'smooth'});if(name==='log'&&!editingDate)$('date').value=localDate()}
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.go)));
+function clearForm(){ $('entryForm').reset();editingDate=null;$('formTitle').textContent='Daily check-in';$('saveEntry').textContent='Save check-in';$('date').value=localDate();document.querySelectorAll('#entryForm details').forEach(d=>d.open=false)}
+function editEntry(x){editingDate=x.date;fields.forEach(k=>{const el=$(k);if(el)el.value=x[k]??''});$('formTitle').textContent='Edit check-in';$('saveEntry').textContent='Update entry';switchTab('log');if(x.fat!=null||x.muscle!=null||x.bodyfat!=null)document.querySelector('#entryForm > details').open=true}
+$('entryForm').addEventListener('submit',e=>{e.preventDefault();const x={};fields.forEach(k=>{const el=$(k);if(!el)return;const raw=el.value;x[k]=el.type==='number'?n(raw):raw});if(!x.date||x.weight==null)return;
+ const idx=data.findIndex(y=>y.date===x.date);
+ if(idx>=0&&x.date!==editingDate){if(!confirm('There is already an entry for this date. Replace it?'))return;data[idx]=x}
+ else if(editingDate&&editingDate!==x.date){data=data.filter(y=>y.date!==editingDate);data.push(x)}
+ else if(idx>=0)data[idx]=x;else data.push(x);
+ persist();clearForm();switchTab('home');
+});
+$('cancelEdit').onclick=clearForm;
+$('saveSettings').onclick=()=>{settings.target=n($('target').value)||65;settings.dose=$('currentDose').value;persist();alert('Goals saved.')};
+function exportJSON(){const blob=new Blob([JSON.stringify({app:'Coach Shu Tracker',version:2,exportedAt:new Date().toISOString(),settings,data},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='mounjaro-journey-backup.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+$('exportJson').onclick=exportJSON;$('backupTop').onclick=exportJSON;
+$('importBtn').onclick=()=>$('importFile').click();
+$('importFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text());const rows=Array.isArray(parsed)?parsed:parsed.data;if(!Array.isArray(rows))throw new Error('Invalid backup');if(!confirm('Importing replaces the records currently saved in this tracker. Continue?'))return;data=rows;settings={...settings,...(parsed.settings||{})};persist();alert('Backup restored.')}catch(err){alert('Could not read this backup file. Please select a valid tracker JSON backup.')}e.target.value=''};
+$('clearAll').onclick=()=>{if(confirm('Delete all saved entries from this tracker on this iPhone? Export a backup first if you may need these records.')){data=[];persist()}};
+$('date').value=localDate();render();
+
+const coachFields=['energy'];
+function coachReview(){
+ const a=data.filter(x=>Number.isFinite(x.weight)).sort((x,y)=>x.date.localeCompare(y.date));
+ const first=a[0],last=a[a.length-1],sc=data.filter(x=>x.fat!=null).sort((x,y)=>x.date.localeCompare(y.date));
+ let title='No log. No excuses. Show me the data.',msg='You cannot improve what you refuse to track. Log honestly and let the numbers speak.';
+ if(first&&last){let d=last.weight-first.weight;if(d<-.2){title='Good. You did the work. Now repeat it.';msg=`You are ${(Math.abs(d)).toFixed(1)} kg below your first saved weight. Take the win—but don't get cocky. Repeat the habits. Starving yourself is not discipline.`}
+ else if(d>.2){title='The scale went up. Your brain does not need to go dramatic.';msg=`You are ${d.toFixed(1)} kg above your first saved weight. Check hydration, cycle, sodium and bowel changes. Then review your actual habits. No crash dieting, no punishment cardio, no panic dose changes.`}
+ else{title='Plateau? Then audit the habits—not your self-worth.';msg='A short flat period does not prove the medication stopped working. Check consistency across several weeks. The scale is not your manager; your routine is.'}}
+ if(sc.length>1){let f=sc[0].fat,l=sc[sc.length-1].fat;if(f!=null&&l!=null&&l<f)msg+=` Estimated fat mass is ${(f-l).toFixed(1)} kg lower than your first scan.`}
+ const recent=a.slice(-7),low=recent.filter(x=>x.foodAmount==='Less than usual'||(x.calories!=null&&x.calories<1200)).length;
+ if(low)msg+=` Your recent logs show ${low} day(s) with low intake indicators. Prioritise adequate food, protein and fluids rather than chasing a faster drop.`;
+ const side=recent.filter(x=>x.sideEffect&&x.sideEffect!=='None').length;
+ if(side)msg+=` You logged side effects on ${side} of your latest ${recent.length} entries. Track severity and discuss persistent or worsening symptoms with your prescriber.`;
+ $('coachTitle').textContent=title;$('coachMessage').textContent=msg;
+ $('coachFocus').innerHTML='• Stop negotiating with the plan. Follow the basics consistently.<br>• Include manageable resistance training 2–3 times weekly if medically comfortable.<br>• Track protein, hydration, energy and side effects.<br>• Compare body scans under similar conditions; BIA muscle readings are estimates.';
+}
+function saveWeek(){const w={date:new Date().toISOString().slice(0,10),energy:$('weekEnergy').value,appetite:$('weekAppetite').value,win:$('weekWin').value,improve:$('weekImprove').value};localStorage.setItem('coach_shu_weekly',JSON.stringify(w));$('weekSaved').textContent='Reflection saved.'}
+$('saveWeek').onclick=saveWeek;
+
+coachReview();
+</script>
+
+<script>
+(() => {
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+  }
+  let installPrompt = null;
+  const installButton = document.getElementById('installApp');
+  window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    installPrompt = event;
+    if (installButton) installButton.hidden = false;
+  });
+  if (installButton) {
+    installButton.addEventListener('click', async () => {
+      if (!installPrompt) {
+        alert('To install: open Chrome menu (⋮) and choose "Install app" or "Add to Home screen", if offered.');
+        return;
+      }
+      installPrompt.prompt();
+      await installPrompt.userChoice;
+      installPrompt = null;
+      installButton.hidden = true;
+    });
+  }
+  window.addEventListener('appinstalled', () => {
+    if (installButton) installButton.hidden = true;
+  });
+})();
+</script>
+
+</body>
+</html>
