@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f4efff">
-<title>My Coach Shu</title>
+<title>Coach Shu Elite</title>
 <style>
 
 :root{--bg:#090b10;--surface:#121720;--ink:#f3f5f8;--muted:#929baa;--line:#252d39;--purple:#a78bfa;--purple2:#28213d;--green:#42e6a4;--orange:#ffb454;--red:#ff667a;--shadow:0 10px 30px rgba(0,0,0,.28)}
@@ -33,14 +33,14 @@ main{padding:16px 14px 20px}.view{display:none}.view.active{display:block}
 .quickrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.rowstart{display:flex;align-items:center;gap:10px}
 .dot{width:9px;height:9px;border-radius:50%;display:inline-block;background:var(--purple);margin-right:5px}.dot.orange{background:var(--orange)}.dot.green{background:var(--green)}
 .chartbox{width:100%;overflow:hidden}.chart{width:100%;height:205px;display:block}.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin:5px 0 0}
-.fieldgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.field{min-width:0;display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}label{font-size:11px;color:#aab4c3;font-weight:850;letter-spacing:.5px}
+.datepick-wrap{position:relative;display:flex;align-items:center}.datepick-wrap input{padding-right:48px}.datepick-trigger{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:36px;height:36px;min-height:36px;border:0;border-radius:9px;background:#f1eafe;color:#7656b5;display:grid;place-items:center;font-size:19px;cursor:pointer}.datepick-trigger:focus{outline:2px solid #a78be8;outline-offset:2px}.fieldgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.field{min-width:0;display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}label{font-size:11px;color:#aab4c3;font-weight:850;letter-spacing:.5px}
 input,select,textarea{width:100%;min-width:0;border:1px solid #354052;background:#0d131c;color:#f3f5f8;border-radius:12px;padding:12px 11px;min-height:45px;outline:none;font-size:16px}input:focus,select:focus,textarea:focus{border-color:#a78bfa;box-shadow:0 0 0 3px #8b5cf633}input::placeholder,textarea::placeholder{color:#657184}input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1)}textarea{min-height:75px;resize:vertical}
 .formsection{padding:14px 0;border-top:1px solid var(--line)}.formsection:first-of-type{border-top:0;padding-top:0}.formsection h3{font-size:13px;margin:0 0 11px;color:#e7eaf0}.help{font-size:11px;color:var(--muted);margin:8px 0 0}
 details{border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:12px;background:#101721}summary{font-weight:850;font-size:12px;cursor:pointer;color:#c4b5fd}details .fieldgrid{margin-top:12px}
 .records{display:flex;flex-direction:column;gap:9px}.record{background:#121923;border:1px solid var(--line);border-radius:15px;padding:13px}.record .date{font-size:11px;color:var(--muted)}.record .wt{font-size:21px;font-weight:900;color:#fff}.recordmeta{display:flex;flex-wrap:wrap;gap:7px;margin-top:7px}.tag{font-size:10px;background:#252038;color:#d3c4ff;padding:4px 7px;border-radius:8px}
 .nav{position:fixed;z-index:10;bottom:0;left:0;right:0;background:#0c1119ed;backdrop-filter:blur(16px);border-top:1px solid #293241;padding:7px 7px calc(7px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(5,1fr);max-width:760px;margin:0 auto}
 .nav button{border:0;background:transparent;color:#758195;font-size:10px;font-weight:800;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:3px;min-height:48px}.nav button .ico{font-size:19px;line-height:1}.nav button.active{color:#c4b5fd}
-.notice{background:#1b2330;border:1px solid #303b4b;border-radius:13px;padding:12px;font-size:11px;color:#b9c3d1;margin-top:12px}.empty{text-align:center;color:var(--muted);padding:25px 12px;font-size:13px}
+.notice{background:#1b2330;border:1px solid #303b4b;border-radius:13px;padding:12px;font-size:11px;color:#b9c3d1;margin-top:12px}.warning-banner{background:#fff1e8;border:2px solid #e58b42;color:#813b12;border-radius:12px;padding:12px;font-weight:700;margin:10px 0}.empty{text-align:center;color:var(--muted);padding:25px 12px;font-size:13px}
 .hidden{display:none!important}.twoactions{display:flex;gap:8px;flex-wrap:wrap}.twoactions>*{flex:1}hr{border:0;border-top:1px solid var(--line);margin:13px 0}
 #view-coach .card:first-of-type{background:linear-gradient(145deg,#241b36,#151b27);border-color:#66508c;box-shadow:0 10px 35px #0006}#coachTitle{font-size:20px;line-height:1.25;color:#fff}#coachMessage{color:#d7dce5!important;line-height:1.65!important}#coachFocus{color:#c6ced9}
 @media(min-width:600px){main{padding:20px}.metrics{grid-template-columns:repeat(4,minmax(0,1fr))}.top{padding:24px 22px}.bigweight{font-size:46px}}
@@ -116,14 +116,16 @@ main{padding:14px 12px 24px;}
  <div class="card" id="calorieHomeCard">
   <div class="row"><h3 style="font-size:14px;margin:0">🔥 Daily calorie command</h3><span class="pill" id="caloriePlanStatus">Set your goal</span></div>
   <div class="metrics" style="margin-bottom:4px">
-   <div class="metric"><div class="label">Daily target</div><div class="value" id="homeCalTarget">—</div><div class="foot">kcal to eat</div></div>
+   <div class="metric"><div class="label">Calculated calorie figure</div><div class="value" id="homeCalTarget">—</div><div class="foot">mathematical estimate · not a prescription</div></div>
    <div class="metric"><div class="label">Logged today</div><div class="value" id="homeCalEaten">—</div><div class="foot">kcal eaten</div></div>
    <div class="metric"><div class="label">Remaining</div><div class="value" id="homeCalLeft">—</div><div class="foot">within target</div></div>
    <div class="metric"><div class="label">Protein target</div><div class="value" id="homeProteinTarget">—</div><div class="foot">grams / day</div></div>
+   <div class="metric"><div class="label">Exercise burned</div><div class="value" id="homeExerciseBurn">—</div><div class="foot">active kcal · logged separately</div></div>
+   <div class="metric"><div class="label">Net calories</div><div class="value" id="homeNetCalories">—</div><div class="foot">eaten − exercise burn</div></div>
   </div>
   <div class="progress"><span id="calorieBar" style="width:0%"></span></div>
   <p class="help" id="calorieCoachLine">Set your target weight and date in Trends → Goal & calorie plan.</p>
-  <div class="tiny">Exercise calories are shown separately. Do not automatically eat them back.</div>
+  <div class="tiny">Your food target stays fixed. Exercise burn and net calories are tracking figures only; exercise does not increase your food allowance, and net calories do not replace your goal-based intake target.</div>
  </div>
  <div class="quickrow"><button class="btn" data-go="log">＋ Add today's log</button><button class="btn light" data-go="trends">View my trends ↗</button></div>
  <div class="sectionhead"><h2>Recent check-ins</h2><span class="tiny">Latest 3</span></div>
@@ -158,7 +160,7 @@ main{padding:14px 12px 24px;}
    <div class="fieldgrid">
     <div class="field"><label for="exercise">ACTIVITY</label><select id="exercise"><option value="">Choose</option><option>Rest day</option><option>Walking</option><option>Treadmill</option><option>Strength training</option><option>Walking + strength</option><option>Cycling</option><option>Other</option></select></div>
     <div class="field"><label for="minutes">DURATION (minutes)</label><input id="minutes" type="number" min="0" max="600" placeholder="e.g. 30"></div>
-    <div class="field"><label for="activeCalories">ACTIVE CALORIES (kcal)</label><input id="activeCalories" type="number" min="0" max="5000" placeholder="From watch / machine"></div><div class="field"><label for="energy">ENERGY</label><select id="energy"><option value="">Choose</option><option>Great</option><option>Good</option><option>Okay</option><option>Low</option><option>Exhausted</option></select></div>
+    <div class="field"><label for="activeCalories">WORKOUT WORKOUT ACTIVE CALORIES (kcal)</label><input id="activeCalories" type="number" min="0" max="2500" placeholder="Exercise session only"><small class="help" style="margin:0">Enter active calories for this workout only—not your total daily active calories.</small></div><div class="field"><label for="energy">ENERGY</label><select id="energy"><option value="">Choose</option><option>Great</option><option>Good</option><option>Okay</option><option>Low</option><option>Exhausted</option></select></div>
    </div>
   </div>
   <div class="formsection">
@@ -225,17 +227,19 @@ main{padding:14px 12px 24px;}
  </div>
  <div class="card">
   <h3 style="font-size:14px;margin:0 0 10px">🎯 Goal & calorie plan</h3>
-  <p class="help" style="margin:0 0 12px">Enter your goal weight and target date. Coach Shu estimates your energy needs using the Mifflin-St Jeor equation, then recalculates when your latest weight changes. These are starting estimates—not medical prescriptions.</p>
+  <p class="help" style="margin:0 0 12px">Enter your goal weight and target date. The calorie preview updates as you change these settings; press Save to keep them after closing the app. Coach Shu estimates your energy needs using the Mifflin-St Jeor equation. These are starting estimates—not medical prescriptions.</p>
   <div class="fieldgrid">
    <div class="field"><label for="target">TARGET WEIGHT (kg)</label><input id="target" type="number" min="30" max="200" step=".1" value="65"></div>
-   <div class="field"><label for="goalDate">TARGET DATE</label><input id="goalDate" type="date"></div>
+   <div class="field"><label for="goalDate">TARGET DATE</label><div class="datepick-wrap"><input id="goalDate" type="date" aria-label="Select your target date"><button class="datepick-trigger" id="openGoalCalendar" type="button" aria-label="Open calendar to select target date" title="Choose date">📅</button></div><small class="help" style="margin:0">Tap the calendar icon to choose your deadline.</small></div>
    <div class="field"><label for="heightCm">HEIGHT (cm)</label><input id="heightCm" type="number" min="120" max="220" step="1" value="158"></div>
    <div class="field"><label for="ageYears">AGE (years)</label><input id="ageYears" type="number" min="18" max="100" step="1" value="27"></div>
    <div class="field"><label for="sexAtBirth">ENERGY FORMULA</label><select id="sexAtBirth"><option value="female">Female</option><option value="male">Male</option></select></div>
    <div class="field"><label for="activityLevel">DAILY ACTIVITY</label><select id="activityLevel"><option value="1.2">Mostly sitting</option><option value="1.375">Lightly active</option><option value="1.55">Moderately active</option><option value="1.725">Very active</option></select></div>
+   <div class="field"><label for="calorieMode">CALORIE TARGET MODE</label><select id="calorieMode"><option value="automatic">Automatic estimate</option><option value="manual">Manual target</option></select></div>
+   <div class="field"><label for="manualCalories">MANUAL DAILY TARGET (kcal)</label><input id="manualCalories" type="number" min="1" max="6000" step="50" placeholder="Leave blank for automatic"></div>
    <div class="field full"><label for="currentDose">CURRENT PRESCRIBED DOSE (RECORD ONLY)</label><select id="currentDose"><option>2.5 mg</option><option>5 mg</option><option>7.5 mg</option><option>10 mg</option><option>12.5 mg</option><option>15 mg</option></select></div>
   </div>
-  <button class="btn light full" id="saveSettings" style="margin-top:11px">Save goal & recalculate</button>
+  <button class="btn light full" id="saveSettings" style="margin-top:11px">Save goal & settings</button>
   <div id="caloriePlanResult" class="notice" style="margin-top:12px">Save your details to calculate your estimated daily calorie and protein targets.</div>
  </div>
  <div class="card">
@@ -297,7 +301,7 @@ const seed=[
 ];
 const $=id=>document.getElementById(id);
 const fields=['date','weight','waterIntake','steps','calories','protein','hunger','foodAmount','meals','exercise','minutes','activeCalories','energy','dose','site','sideEffect','severity','notes','fat','muscle','skeletal','water','bodyfat','visceral','waist','hip','fatArmL','fatArmR','fatTrunk','fatLegL','fatLegR','muscleArmL','muscleArmR','muscleTrunk','muscleLegL','muscleLegR'];
-let data=[],settings={target:65,goalDate:'',heightCm:158,ageYears:27,sexAtBirth:'female',activityLevel:1.2,dose:'2.5 mg'},editingDate=null;
+let data=[],settings={target:65,goalDate:'',heightCm:158,ageYears:27,sexAtBirth:'female',activityLevel:1.2,dose:'2.5 mg',calorieMode:'automatic',manualCalories:null},editingDate=null;
 try{const s=localStorage.getItem(KEY);data=s?JSON.parse(s):seed.slice()}catch(e){data=seed.slice()}
 // Imported historical calorie/activity records supplied by Shu (29 Oct–11 Nov 2026).
 // Calorie ranges are retained; the midpoint is used only for plotting and averages.
@@ -321,6 +325,7 @@ let historyImported=false;
 for(const h of importedHistory){const existing=data.find(x=>x.date===h.date);if(existing){if(existing.calories==null){existing.calories=h.calories;existing.caloriesLow=h.caloriesLow;existing.caloriesHigh=h.caloriesHigh;existing.historySource=h.historySource;}if(existing.activeCalories==null&&h.activeCalories!=null)existing.activeCalories=h.activeCalories;}else{data.push({...h,weight:null,notes:'Historical calorie/activity record imported. Weight and protein were not provided.'});historyImported=true;}}
 if(historyImported||importedHistory.some(h=>{const x=data.find(y=>y.date===h.date);return x&&x.historySource===h.historySource;})){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){}}
 try{settings={...settings,...JSON.parse(localStorage.getItem(KEY+'_settings')||'{}')}}catch(e){}
+if(!['automatic','manual'].includes(settings.calorieMode))settings.calorieMode='automatic';
 const n=v=>v===''||v===null||v===undefined?null:Number(v);
 const f=v=>v==null||!Number.isFinite(Number(v))?'—':Number(v).toFixed(1);
 function localDate(){const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
@@ -329,37 +334,96 @@ function persist(){try{localStorage.setItem(KEY,JSON.stringify(data));localStora
 function latest(){return [...data].filter(x=>Number.isFinite(x.weight)).sort((a,b)=>a.date.localeCompare(b.date)).at(-1)}
 function scans(){return [...data].filter(x=>x.fat!=null||x.muscle!=null||x.bodyfat!=null).sort((a,b)=>a.date.localeCompare(b.date))}
 function caloriePlan(){
- const w=Number(latest()?.weight)||Number(settings.startWeight)||72;
- const age=Number(settings.ageYears)||27,h=Number(settings.heightCm)||158;
- const sex= settings.sexAtBirth==='male'?5:-161,activity=Number(settings.activityLevel)||1.2;
+ const latestEntry=latest();
+ const hasLoggedWeight=!!latestEntry&&Number.isFinite(Number(latestEntry.weight));
+ const w=hasLoggedWeight?Number(latestEntry.weight):(Number(settings.startWeight)||72.4);
+ const weightDate=hasLoggedWeight?latestEntry.date:null;
+ const age=Number(settings.ageYears),h=Number(settings.heightCm);
+ const sex=settings.sexAtBirth==='male'?5:-161;
+ const activity=Number(settings.activityLevel);
  const bmr=10*w+6.25*h-5*age+sex,tdee=bmr*activity;
- const target=Number(settings.target)||65,kgToLose=Math.max(0,w-target);
- let desiredWeekly=null,daysLeft=null,requiredWeekly=null;
- if(settings.goalDate){daysLeft=Math.max(1,Math.ceil((new Date(settings.goalDate+'T12:00:00')-new Date(localDate()+'T12:00:00'))/86400000));requiredWeekly=kgToLose/(daysLeft/7);}
- // A moderate, bounded deficit; an aggressive deadline never forces a crash target.
- let deficit=kgToLose>0?Math.min(500,Math.max(250,kgToLose*100)):0;
- if(requiredWeekly!==null && requiredWeekly<0.25) deficit=Math.min(deficit,250);
- const calories=Math.max(settings.sexAtBirth==='female'?1200:1500,Math.round((tdee-deficit)/50)*50);
- const protein=Math.round(Math.max(1.2,Math.min(1.6,1.4))*target);
- const safeWeekly=Math.min(0.75,w*0.0075),estimatedWeeks=safeWeekly>0?kgToLose/0.5:0;
- const estimatedDate=new Date();estimatedDate.setDate(estimatedDate.getDate()+Math.ceil(kgToLose/0.5*7));
- return {w,h,age,bmr,tdee,calories,protein,deficit,kgToLose,daysLeft,requiredWeekly,safeWeekly,estimatedDate};
+ const target=Number(settings.target);
+ const difference=w-target; // positive = loss goal; negative = gain goal
+ const kgToLose=Math.max(0,difference),kgToGain=Math.max(0,-difference);
+ let daysLeft=null,requiredWeekly=null,deadlinePassed=false,deadlineToday=false;
+ let requiredDeficit=0,requiredSurplus=0,automaticCalories=tdee,calculationStatus='maintenance';
+ if(settings.goalDate){
+   const targetDay=new Date(settings.goalDate+'T12:00:00');
+   const today=new Date(localDate()+'T12:00:00');
+   if(!Number.isFinite(targetDay.getTime())){automaticCalories=null;calculationStatus='invalid-deadline';}
+   else daysLeft=Math.round((targetDay-today)/86400000);
+   deadlinePassed=daysLeft!==null&&daysLeft<0; deadlineToday=daysLeft===0;
+   if(daysLeft!==null&&daysLeft>0&&kgToLose>0){
+     requiredWeekly=kgToLose/(daysLeft/7);
+     requiredDeficit=(kgToLose*7700)/daysLeft;
+     automaticCalories=Math.round((tdee-requiredDeficit)/10)*10;
+     calculationStatus='weight-loss';
+   }else if(daysLeft!==null&&daysLeft>0&&kgToGain>0){
+     requiredWeekly=kgToGain/(daysLeft/7);
+     requiredSurplus=(kgToGain*7700)/daysLeft;
+     automaticCalories=Math.round((tdee+requiredSurplus)/10)*10;
+     calculationStatus='weight-gain';
+   }else if(deadlinePassed||deadlineToday){
+     automaticCalories=null; calculationStatus='invalid-deadline';
+   }
+ }
+ const manual=Number(settings.manualCalories);
+ const useManual=settings.calorieMode==='manual'&&Number.isFinite(manual)&&manual>0;
+ const calories=useManual?manual:automaticCalories;
+ const protein=Math.round(1.4*Math.min(w,Math.max(target,50)));
+ const warningThreshold=1400;
+ const belowThreshold=calories!==null&&calories<warningThreshold;
+ const impossible=automaticCalories!==null&&automaticCalories<=0;
+ const paceAboveGuidance=requiredWeekly!==null&&requiredWeekly>Math.min(0.75,w*0.01);
+ const weightAgeDays=weightDate?Math.floor((new Date(localDate()+'T12:00:00')-new Date(weightDate+'T12:00:00'))/86400000):null;
+ const weightOutdated=weightAgeDays!==null&&weightAgeDays>30;
+ return {w,h,age,bmr,tdee,target,calories,automaticCalories,protein,requiredDeficit,requiredSurplus,kgToLose,kgToGain,difference,daysLeft,requiredWeekly,calculationStatus,useManual,warningThreshold,deadlinePassed,deadlineToday,belowThreshold,impossible,paceAboveGuidance,weightDate,weightAgeDays,weightOutdated,hasLoggedWeight};
 }
 function renderCaloriePlan(){
  const p=caloriePlan();
  ['goalDate','heightCm','ageYears','sexAtBirth','activityLevel'].forEach(k=>{if($(k))$(k).value=settings[k]??''});
+ if($('calorieMode'))$('calorieMode').value=settings.calorieMode||'automatic';
+ if($('manualCalories'))$('manualCalories').value=settings.manualCalories??'';
  if($('currentDose'))$('currentDose').value=settings.dose;
- const today=data.find(x=>x.date===localDate())||{};const eaten=Number.isFinite(Number(today.calories))?Number(today.calories):null;
- $('homeCalTarget').textContent=p.calories.toLocaleString();$('homeProteinTarget').textContent=p.protein+' g';
+ const today=data.find(x=>x.date===localDate())||{};
+ const hasValue=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v));
+ const eaten=hasValue(today.calories)?Number(today.calories):null;
+ const exerciseBurn=hasValue(today.activeCalories)?Number(today.activeCalories):null;
+ const netCalories=eaten!==null&&exerciseBurn!==null?eaten-exerciseBurn:null;
+ const targetAvailable=Number.isFinite(p.calories);
+ $('homeCalTarget').textContent=targetAvailable?p.calories.toLocaleString():'—';
+ $('homeProteinTarget').textContent=p.protein+' g';
  $('homeCalEaten').textContent=eaten===null?'—':eaten.toLocaleString();
- $('homeCalLeft').textContent=eaten===null?'—':Math.max(0,p.calories-eaten).toLocaleString();
- $('calorieBar').style.width=(eaten===null?0:Math.min(100,eaten/p.calories*100))+'%';
- $('caloriePlanStatus').textContent=eaten===null?'Log food today':eaten<=p.calories?'Within target':'Over target';
- $('calorieCoachLine').textContent=eaten===null?'No calories logged today. Add your meals in Log.':eaten>p.calories?`You are ${(eaten-p.calories).toLocaleString()} kcal over today's guide. No punishment—return to plan at the next meal.`:`${(p.calories-eaten).toLocaleString()} kcal remain in today's guide. Prioritise protein and satisfying meals.`;
- let timing='';
- if(p.requiredWeekly!==null){timing=p.requiredWeekly>p.safeWeekly?`Your requested deadline requires about ${p.requiredWeekly.toFixed(2)} kg/week, which is faster than this planner's conservative guide (${p.safeWeekly.toFixed(2)} kg/week). Consider extending the date; the calorie target will not be pushed lower to force it.`:`Your requested pace is about ${p.requiredWeekly.toFixed(2)} kg/week. Review the trend over 3–4 weeks and adjust only gradually.`}
- $('caloriePlanResult').innerHTML=`<b>Estimated starting plan</b><br>• BMR: ${Math.round(p.bmr)} kcal/day<br>• Maintenance estimate (TDEE): ${Math.round(p.tdee)} kcal/day<br>• Suggested intake guide: <b>${p.calories.toLocaleString()} kcal/day</b><br>• Protein guide: <b>${p.protein} g/day</b><br>• Activity: aim for regular movement and about 150 minutes/week of moderate activity, building up gradually.<br>${timing?'<br>'+timing:''}<br><small>Estimates depend on accurate age, height, sex and activity selection. Do not treat exercise-calorie estimates as exact or automatically eat them back. If pregnant, breastfeeding, medically unwell, or taking medication affecting appetite/glucose, confirm calorie targets with your clinician or dietitian. Do not use this app to change medication doses.</small>`;
+ $('homeCalLeft').textContent=eaten===null||!targetAvailable?'—':Math.max(0,p.calories-eaten).toLocaleString();
+ $('homeExerciseBurn').textContent=exerciseBurn===null?'—':exerciseBurn.toLocaleString();
+ $('homeNetCalories').textContent=netCalories===null?'—':netCalories.toLocaleString();
+ $('calorieBar').style.width=(eaten===null||!targetAvailable||p.calories<=0?0:Math.max(0,Math.min(100,eaten/p.calories*100)))+'%';
+ $('caloriePlanStatus').textContent=!targetAvailable?'Choose a future date':eaten===null?'Log food today':eaten<=p.calories?'Within target':'Over target';
+ $('calorieCoachLine').textContent=!targetAvailable?'A valid future target date is needed for the automatic deadline calculation.':eaten===null?'No calories logged today. Add your meals in Log.':eaten>p.calories?`You are ${(eaten-p.calories).toLocaleString()} kcal over today's guide. No punishment—return to plan at the next meal.`:`${(p.calories-eaten).toLocaleString()} kcal remain in today's guide. Prioritise protein and satisfying meals.`;
+ let warnings=[];
+ if(p.deadlinePassed)warnings.push('Your target date has passed. Select a future date; no deadline-based intake is calculated.');
+ if(p.deadlineToday)warnings.push('Your target date is today, so there are zero days remaining. Select a future date to calculate a deadline-based estimate.');
+ if(settings.goalDate&&p.daysLeft===null&&!p.deadlinePassed&&!p.deadlineToday&&!p.useManual)warnings.push('The saved target date is invalid. Select a valid date from the calendar.');
+ if(!settings.goalDate&&!p.useManual)warnings.push('No target date selected. The automatic figure currently shows estimated maintenance (TDEE), not a deadline-based weight-loss plan.');
+ if(p.belowThreshold)warnings.push(`⚠️ SAFETY WARNING: The exact mathematical intake is below ${p.warningThreshold.toLocaleString()} kcal/day. This is displayed for transparency, NOT as an instruction to eat this amount. Do not follow it without individual clinical/dietitian guidance; consider a later target date.`);
+ if(p.impossible)warnings.push('⚠️ The mathematical intake is zero or negative. This is not a practical eating target. The deadline is not feasible using this calculation; choose a later date and discuss your plan with your clinician.');
+ if(p.paceAboveGuidance)warnings.push(`⚠️ The requested pace is approximately ${p.requiredWeekly.toFixed(2)} kg/week, which is above a commonly used gradual-loss planning range. This mathematical estimate should not be treated as a safe target.`);
+ if(p.weightOutdated)warnings.push(`Your latest saved weight is ${p.weightAgeDays} days old (${niceDate(p.weightDate)}). Record a fresh morning weight before relying on this estimate.`);
+ if(!p.hasLoggedWeight)warnings.push('No saved weight entry was found. The calculation is temporarily using 72.4 kg as a fallback; enter your current weight to personalise it.');
+ if(p.calculationStatus==='weight-gain')warnings.push('Your selected target is above your current weight. The app calculates an estimated energy surplus, not a weight-loss deficit.');
+ if(p.calculationStatus==='maintenance'&&p.difference===0)warnings.push('Your current weight matches your target. The estimated intake is maintenance, not a weight-loss deficit.');
+ if(p.useManual&&p.calories<1400)warnings.push('⚠️ Your manual target is below 1,400 kcal/day. This is your entered value, not a medical recommendation.');
+ const adjustmentLabel=p.calculationStatus==='weight-gain'?'Required daily surplus':p.calculationStatus==='weight-loss'?'Required daily deficit':'Required daily adjustment';
+ const adjustmentValue=p.calculationStatus==='weight-gain'?p.requiredSurplus:p.requiredDeficit;
+ const resultNumber=v=>Number.isFinite(v)?Math.round(v).toLocaleString():'Not available';
+ const goalMovement=p.calculationStatus==='weight-gain'?`Weight to gain: <b>${p.kgToGain.toFixed(1)} kg</b>`:`Weight to lose: <b>${p.kgToLose.toFixed(1)} kg</b>`;
+ const currentWeightBasis=p.hasLoggedWeight?`Latest saved weight: <b>${p.weightDate?niceDate(p.weightDate):'date unavailable'}</b>`:'Fallback weight used: <b>72.4 kg</b>';
+ const targetBasis=p.useManual?'Manual mode is ON, so your entered calorie target overrides the automatic calculation.':'Automatic mode is ON. The exact mathematical estimate has no 1,400 kcal floor and no 500 kcal deficit cap. The 1,400 kcal value is a warning threshold only.';
+ const adjustmentText=p.calculationStatus==='invalid-deadline'?'Not calculated':resultNumber(adjustmentValue)+' kcal/day';
+ const warningHtml=warnings.length?`<div class="warning-banner">${warnings.map(x=>`<div style="margin:4px 0">${x}</div>`).join('')}</div>`:'';
+ $('caloriePlanResult').innerHTML=`<b>${p.useManual?'Your manual calorie plan':'Exact goal-and-deadline calculation'}</b><br>• Current weight used: <b>${p.w.toFixed(1)} kg</b> (${currentWeightBasis})<br>• Goal weight: <b>${p.target.toFixed(1)} kg</b><br>• ${goalMovement}<br>• ${settings.goalDate?'Target date: <b>'+niceDate(settings.goalDate)+'</b>':'Target date: <b>Not set</b>'}<br>• ${p.daysLeft!==null?'Days remaining: <b>'+p.daysLeft+'</b><br>':''}• BMR (resting estimate): <b>${Math.round(p.bmr).toLocaleString()} kcal/day</b><br>• TDEE (maintenance estimate): <b>${Math.round(p.tdee).toLocaleString()} kcal/day</b><br>• ${adjustmentLabel}: <b>${adjustmentText}</b><br>• Uncapped calculated intake: <b>${resultNumber(p.automaticCalories)} kcal/day</b><br>• Active daily intake target: <b>${resultNumber(p.calories)} kcal/day</b> ${p.useManual?'(manual)':'(automatic)'}<br>• Protein planning guide: <b>${p.protein} g/day</b><br>• Activity setting: ${p.activityLevel??Number(settings.activityLevel).toFixed(3)} × BMR<br>${warningHtml}<small>${targetBasis} TDEE estimates maintenance at your current weight and activity. The 7,700 kcal/kg conversion is a simplified planning approximation; real weight change is not perfectly linear. The mathematical result is not automatically a safe eating recommendation. Confirm an appropriate plan with your clinician/dietitian, especially while using Mounjaro.</small>`;
 }
+
 function render(){
  data.sort((a,b)=>a.date.localeCompare(b.date));
  const valid=data.filter(x=>Number.isFinite(x.weight)).sort((a,b)=>a.date.localeCompare(b.date)),first=valid[0],last=valid.at(-1),scan=scans().at(-1),firstScan=scans()[0];
@@ -370,8 +434,9 @@ function render(){
  $('targetText').textContent=`Target ${f(settings.target)} kg`;
  $('startText').textContent=first?`Start ${f(first.weight)} kg`:'Start —';
  const remain=last?last.weight-settings.target:null;
- $('remainingText').textContent=remain===null?'Set a target':remain>0?`${f(remain)} kg to go`:`${f(Math.abs(remain))} kg below target`;
- let pct=first&&last&&first.weight!==settings.target?((first.weight-last.weight)/(first.weight-settings.target))*100:0;
+ $('remainingText').textContent=remain===null?'Set a target':remain>0?`${f(remain)} kg to lose`:remain<0?`${f(Math.abs(remain))} kg to gain`:'Target reached';
+ let pct=0;
+ if(first&&last&&first.weight!==settings.target){pct=first.weight>settings.target?((first.weight-last.weight)/(first.weight-settings.target))*100:((last.weight-first.weight)/(settings.target-first.weight))*100;}
  $('goalBar').style.width=Math.max(0,Math.min(100,pct))+'%';
  $('fatMetric').textContent=scan?`${f(scan.fat)} kg`:'—';
  $('muscleMetric').textContent=scan?`${f(scan.muscle)} kg`:'—';
@@ -388,7 +453,7 @@ function render(){
  $('target').value=settings.target;$('currentDose').value=settings.dose;
  renderCaloriePlan();
  drawLine($('weightChart'),valid.map(x=>({date:x.date,value:x.weight})),settings.target);
- drawCalories($('calorieChart'),data.filter(x=>x.calories!=null).sort((a,b)=>a.date.localeCompare(b.date)).slice(-14),caloriePlan().calories);
+ drawCalories($('calorieChart'),data.filter(x=>x.calories!=null).sort((a,b)=>a.date.localeCompare(b.date)).slice(-14),Number.isFinite(caloriePlan().calories)?caloriePlan().calories:null);
  const ss=scans();
  drawMulti($('bodyChart'),[{label:'Fat mass',color:'#c27a42',rows:ss.filter(x=>x.fat!=null).map(x=>({date:x.date,value:x.fat}))},{label:'Muscle mass',color:'#16845b',rows:ss.filter(x=>x.muscle!=null).map(x=>({date:x.date,value:x.muscle}))}]);
 }
@@ -424,9 +489,9 @@ function drawLine(svg,rows,target){
 function drawCalories(svg,rows,target){
  const ns='http://www.w3.org/2000/svg';svg.innerHTML='';const add=(tag,a,t)=>{const e=document.createElementNS(ns,tag);Object.entries(a).forEach(([k,v])=>e.setAttribute(k,v));if(t)e.textContent=t;svg.appendChild(e)};
  if(!rows.length){add('text',{x:260,y:105,'text-anchor':'middle',fill:'#929baa','font-size':13},'Log daily calories to build your graph');return}
- const vals=rows.map(x=>Number(x.calories)).concat([Number(target)]),lo=0,hi=Math.max(1600,Math.ceil(Math.max(...vals)*1.15/200)*200),X=i=>35+(rows.length===1?225:i*450/(rows.length-1)),Y=v=>175-(v-lo)/(hi-lo||1)*135;
+ const vals=rows.map(x=>Number(x.calories)).filter(Number.isFinite),hasTarget=target!==null&&target!==undefined&&target!==''&&Number.isFinite(Number(target)),lo=0,hi=Math.max(1600,Math.ceil(Math.max(...vals,...(hasTarget&&Number(target)>0?[Number(target)]:[]))*1.15/200)*200),X=i=>35+(rows.length===1?225:i*450/(rows.length-1)),Y=v=>175-(v-lo)/(hi-lo||1)*135;
  for(let j=0;j<=4;j++){const v=lo+(hi-lo)*j/4,y=Y(v);add('line',{x1:35,y1:y,x2:495,y2:y,stroke:'#303b4a'});add('text',{x:29,y:y+4,'text-anchor':'end','font-size':10,fill:'#929baa'},Math.round(v))}
- const ty=Y(target);add('line',{x1:35,y1:ty,x2:495,y2:ty,stroke:'#ffb454','stroke-width':2,'stroke-dasharray':'6 4'});
+ if(hasTarget&&Number(target)>=0){const ty=Y(Number(target));if(Number(target)<=hi)add('line',{x1:35,y1:ty,x2:495,y2:ty,stroke:'#ffb454','stroke-width':2,'stroke-dasharray':'6 4'});}
  if(rows.length>1)add('polyline',{points:rows.map((r,i)=>`${X(i)},${Y(Number(r.calories))}`).join(' '),fill:'none',stroke:'#a78bfa','stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round'});
  rows.forEach((r,i)=>{add('circle',{cx:X(i),cy:Y(Number(r.calories)),r:4.5,fill:'#a78bfa',stroke:'#fff','stroke-width':1.5});if(i===0||i===rows.length-1||rows.length<=6)add('text',{x:X(i),y:197,'text-anchor':'middle','font-size':10,fill:'#929baa'},r.date.slice(5))});
 }
@@ -451,7 +516,23 @@ $('entryForm').addEventListener('submit',e=>{e.preventDefault();const x={};field
  persist();clearForm();switchTab('home');
 });
 $('cancelEdit').onclick=clearForm;
-$('saveSettings').onclick=()=>{settings.target=n($('target').value)||65;settings.goalDate=$('goalDate').value;settings.heightCm=n($('heightCm').value)||158;settings.ageYears=n($('ageYears').value)||27;settings.sexAtBirth=$('sexAtBirth').value;settings.activityLevel=n($('activityLevel').value)||1.2;settings.dose=$('currentDose').value;persist();alert('Goal saved. Calorie and protein estimates recalculated.');};
+function validateGoalSettings(){
+ const target=n($('target').value),height=n($('heightCm').value),age=n($('ageYears').value),activity=n($('activityLevel').value),manual=n($('manualCalories').value),mode=$('calorieMode').value;
+ if(!Number.isFinite(target)||target<30||target>200){alert('Enter a target weight between 30 and 200 kg.');$('target').focus();return null;}
+ if(!Number.isFinite(height)||height<120||height>220){alert('Enter a height between 120 and 220 cm.');$('heightCm').focus();return null;}
+ if(!Number.isInteger(age)||age<18||age>100){alert('Enter an age between 18 and 100 years.');$('ageYears').focus();return null;}
+ if(!Number.isFinite(activity)||![1.2,1.375,1.55,1.725].includes(activity)){alert('Choose a valid daily activity level.');$('activityLevel').focus();return null;}
+ if(mode==='manual'&&(!Number.isFinite(manual)||manual<=0||manual>6000)){alert('Enter a manual calorie target greater than 0 and no more than 6,000 kcal, or choose Automatic estimate.');$('manualCalories').focus();return null;}
+ return {target,heightCm:height,ageYears:age,activityLevel:activity,goalDate:$('goalDate').value,sexAtBirth:$('sexAtBirth').value,dose:$('currentDose').value,calorieMode:mode,manualCalories:mode==='manual'?manual:null};
+}
+$('saveSettings').onclick=()=>{const next=validateGoalSettings();if(!next)return;settings={...settings,...next};persist();alert('Settings saved. Goal, date, BMR and TDEE estimates have been recalculated. Review any safety warnings before using the estimate.');};
+function previewGoalInputs(){
+ const target=n($('target').value),height=n($('heightCm').value),age=n($('ageYears').value),activity=n($('activityLevel').value),manual=n($('manualCalories').value);
+ if(!Number.isFinite(target)||target<30||target>200||!Number.isFinite(height)||height<120||height>220||!Number.isInteger(age)||age<18||age>100||![1.2,1.375,1.55,1.725].includes(activity))return;
+ settings.target=target;settings.goalDate=$('goalDate').value;settings.heightCm=height;settings.ageYears=age;settings.sexAtBirth=$('sexAtBirth').value;settings.activityLevel=activity;settings.calorieMode=$('calorieMode').value;settings.manualCalories=manual;settings.dose=$('currentDose').value;render();
+}
+['target','goalDate','heightCm','ageYears','sexAtBirth','activityLevel','calorieMode','manualCalories'].forEach(id=>{const el=$(id);if(el){el.addEventListener('input',previewGoalInputs);el.addEventListener('change',previewGoalInputs);}});
+$('openGoalCalendar').onclick=()=>{const dateInput=$('goalDate');if(dateInput){if(typeof dateInput.showPicker==='function'){try{dateInput.showPicker();}catch(e){dateInput.focus();dateInput.click();}}else{dateInput.focus();dateInput.click();}}};
 function exportJSON(){const blob=new Blob([JSON.stringify({app:'Coach Shu Tracker',version:2,exportedAt:new Date().toISOString(),settings,data},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='mounjaro-journey-backup.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 $('exportJson').onclick=exportJSON;$('backupTop').onclick=exportJSON;
 $('importBtn').onclick=()=>$('importFile').click();
@@ -468,8 +549,8 @@ function coachReview(){
  else if(d>.2){title='The scale went up. Your brain does not need to go dramatic.';msg=`You are ${d.toFixed(1)} kg above your first saved weight. Check hydration, cycle, sodium and bowel changes. Then review your actual habits. No crash dieting, no punishment cardio, no panic dose changes.`}
  else{title='Plateau? Then audit the habits—not your self-worth.';msg='A short flat period does not prove the medication stopped working. Check consistency across several weeks. The scale is not your manager; your routine is.'}}
  if(sc.length>1){let f=sc[0].fat,l=sc[sc.length-1].fat;if(f!=null&&l!=null&&l<f)msg+=` Estimated fat mass is ${(f-l).toFixed(1)} kg lower than your first scan.`}
- const recent=a.slice(-7),low=recent.filter(x=>x.foodAmount==='Less than usual'||(x.calories!=null&&x.calories<1200)).length;
- if(low)msg+=` Your recent logs show ${low} day(s) with low intake indicators. Prioritise adequate food, protein and fluids rather than chasing a faster drop.`;
+ const recent=a.slice(-7),low=recent.filter(x=>x.foodAmount==='Less than usual'||(x.calories!=null&&x.calories<1400)).length;
+ if(low)msg+=` Your recent logs show ${low} day(s) with entries below the app's 1,400 kcal review threshold. This threshold is a prompt to review completeness and discuss intake with your clinician/dietitian—not a diagnosis or a personalised minimum.`;
  const side=recent.filter(x=>x.sideEffect&&x.sideEffect!=='None').length;
  if(side)msg+=` You logged side effects on ${side} of your latest ${recent.length} entries. Track severity and discuss persistent or worsening symptoms with your prescriber.`;
  $('coachTitle').textContent=title;$('coachMessage').textContent=msg;
@@ -496,9 +577,10 @@ function buildWeeklyPlan(){
  $('weeklyPlanMetrics').innerHTML=[metric('Days logged',`${week.length}/7`),metric('Calorie avg',avgCal===null?'—':`${Math.round(avgCal)} kcal`),metric('Protein avg',avgProtein===null?'—':`${Math.round(avgProtein)} g`),metric('Exercise',`${mins} min`)].join('');
  const actions=[];
  if(week.length<4) actions.push(['DATA FIRST',`Log at least 5 of the next 7 days: morning weight, meals/calories, protein and activity. A coach cannot analyse an empty spreadsheet. Stop asking the graph to read your mind.`]);
- if(avgCal!==null&&avgCal<p.calories-250) actions.push(['FUEL PROPERLY',`Your logged calorie average is well below the estimated guide (${p.calories} kcal). Check that entries are complete. If accurate, do not cut further; discuss persistently low intake, poor appetite or weakness with your clinician/dietitian.`]);
- else if(avgCal!==null&&avgCal>p.calories+100) actions.push(['CALORIE AWARENESS',`Your logged average is about ${Math.round(avgCal-p.calories)} kcal above the current guide. Review portions, drinks, sauces and snacks without skipping meals or compensating with punishment exercise.`]);
- else if(avgCal!==null) actions.push(['KEEP THE FOOD RECORD HONEST',`Your logged calorie average is around the estimated ${p.calories} kcal guide. Keep portions and logging consistent; the estimate is a starting point, not a rigid ceiling.`]);
+ if(avgCal!==null&&Number.isFinite(p.calories)&&avgCal<p.calories-250) actions.push(['FUEL PROPERLY',`Your logged calorie average is well below the estimated guide (${p.calories} kcal). Check that entries are complete. If accurate, do not cut further; discuss persistently low intake, poor appetite or weakness with your clinician/dietitian.`]);
+ else if(avgCal!==null&&Number.isFinite(p.calories)&&avgCal>p.calories+100) actions.push(['CALORIE AWARENESS',`Your logged average is about ${Math.round(avgCal-p.calories)} kcal above the current guide. Review portions, drinks, sauces and snacks without skipping meals or compensating with punishment exercise.`]);
+ else if(avgCal!==null&&Number.isFinite(p.calories)) actions.push(['KEEP THE FOOD RECORD HONEST',`Your logged calorie average is around the estimated ${p.calories} kcal guide. Keep portions and logging consistent; the estimate is a starting point, not a rigid ceiling.`]);
+ if(avgCal!==null&&!Number.isFinite(p.calories)) actions.push(['CALORIE TARGET UNAVAILABLE',`Your selected deadline is not valid for an automatic calculation. Choose a future date before comparing logged intake with a goal-based target.`]);
  if(avgProtein===null||proteinRows.length<3) actions.push(['PROTEIN VISIBILITY',`Protein data is missing or limited. Record grams on at least 5 days. Current planning guide: approximately ${p.protein} g/day, subject to individual clinical/dietitian advice and kidney-health considerations.`]);
  else if(avgProtein<p.protein*.85) actions.push(['PROTEIN PRIORITY',`Your logged average (${Math.round(avgProtein)} g) is below the ${p.protein} g planning guide. Add a protein source to meals; aim for consistency rather than one huge serving.`]);
  else actions.push(['PROTEIN CONSISTENCY',`Your recorded protein average is ${Math.round(avgProtein)} g/day. Keep distributing protein across meals and pair it with resistance exercise when appropriate.`]);
