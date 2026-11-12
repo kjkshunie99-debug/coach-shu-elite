@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Coach Shu">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#090b10">
+<meta name="theme-color" content="#f4efff">
 <title>My Coach Shu</title>
 <style>
 
@@ -45,6 +45,52 @@ details{border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:
 #view-coach .card:first-of-type{background:linear-gradient(145deg,#241b36,#151b27);border-color:#66508c;box-shadow:0 10px 35px #0006}#coachTitle{font-size:20px;line-height:1.25;color:#fff}#coachMessage{color:#d7dce5!important;line-height:1.65!important}#coachFocus{color:#c6ced9}
 @media(min-width:600px){main{padding:20px}.metrics{grid-template-columns:repeat(4,minmax(0,1fr))}.top{padding:24px 22px}.bigweight{font-size:46px}}
 @media(max-width:360px){.fieldgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.bigweight{font-size:36px}}
+
+/* Coach Shu: soft light lavender + mint theme preview */
+:root{--bg:#f7f5fc;--surface:#ffffff;--ink:#29263a;--muted:#77738b;--line:#e8e2f2;--purple:#8b65d6;--purple2:#f1eafe;--green:#299b70;--orange:#c98225;--red:#d65b70;--shadow:0 8px 24px rgba(65,48,95,.08)}
+body{background:linear-gradient(180deg,#f2edff 0%,#fbfaff 240px,#f7f8fc 100%);color:#29263a}
+.top{background:linear-gradient(120deg,#ffffff 0%,#f1eaff 65%,#eaf8f1 100%);color:#29263a;border-bottom:1px solid #e6ddf4;box-shadow:0 8px 24px rgba(65,48,95,.08)}
+.top .eyebrow{color:#8060c5}.top p{color:#77738b}.topbutton{border:1px solid #ded3f1;background:#fff;color:#604b8e}
+.card,.metric,.record{background:#fff;border:1px solid #e9e3f2;box-shadow:0 5px 18px rgba(65,48,95,.055);color:#29263a}
+.hero-card{background:linear-gradient(135deg,#fff 0%,#f3edff 70%,#effaf4 100%);border:1px solid #e3d8f5;box-shadow:0 8px 24px rgba(65,48,95,.07)}
+.kicker,.tiny,label,.metric .label,.metric .foot,.muted,.progressmeta{color:#77738b}
+.bigweight,.metric .value,.record .wt,#coachTitle{color:#302a43}
+.unit{color:#77738b}.pill{background:#eaf8f1;color:#247b5a;border:1px solid #cdebdc}
+.progress{background:#ece8f3}.progress span{background:linear-gradient(90deg,#a78be8,#54bd91)}
+.metric{background:#fff}.btn{border:1px solid #9b80d6;background:linear-gradient(135deg,#9676dc,#55b78c);color:#fff;box-shadow:0 5px 14px rgba(130,94,190,.16)}
+.btn.light{background:#f1eafe;color:#654a9d;border-color:#ded1f4}.btn.ghost{background:#f7f5fb;color:#514965;border-color:#e5deef}.btn.danger{background:#fff0f2;color:#b84c60;border-color:#f0cbd2}
+input,select,textarea{border:1px solid #ded8e9;background:#fff;color:#302a43}input:focus,select:focus,textarea:focus{border-color:#a78be8;box-shadow:0 0 0 3px #a78be822}input::placeholder,textarea::placeholder{color:#aaa4b7}input[type=date]::-webkit-calendar-picker-indicator{filter:none}
+.formsection{border-top:1px solid #eee8f4}.formsection h3{color:#514965}details{border:1px solid #e7e0ef;background:#fff}summary{color:#7656b5}
+.tag{background:#f1eafe;color:#684fa0}.nav{background:#ffffffed;border-top:1px solid #e8e2f0;box-shadow:0 -5px 20px rgba(65,48,95,.06)}.nav button{color:#9992a8}.nav button.active{color:#7959c1}
+.notice{background:#f0faf5;border:1px solid #d6eee1;color:#426b59}#view-coach .card:first-of-type{background:linear-gradient(145deg,#f3edff,#fff);border-color:#dfd2f4;box-shadow:0 8px 24px rgba(65,48,95,.07)}#coachMessage{color:#514965!important}#coachFocus{color:#77738b}
+
+
+/* iPhone-first usability pass: comfortable touch targets, compact cards, safe areas */
+html{min-height:100%;-webkit-text-size-adjust:100%;} body{min-height:100svh;overscroll-behavior-y:contain;}
+.app{width:100%;max-width:760px;padding-bottom:calc(86px + env(safe-area-inset-bottom));}
+button,.nav button,summary{touch-action:manipulation;}
+button{min-height:44px;}
+input,select,textarea{font-size:16px;min-height:48px;}
+.nav{width:100%;padding-left:max(8px,env(safe-area-inset-left));padding-right:max(8px,env(safe-area-inset-right));padding-bottom:calc(8px + env(safe-area-inset-bottom));}
+.nav button{min-height:54px;font-size:10px;border-radius:12px;}
+.nav button.active{background:#f1eafe;}
+.top{padding-top:calc(16px + env(safe-area-inset-top));border-radius:0 0 20px 20px;}
+main{padding:14px 12px 24px;}
+.card,.hero-card{border-radius:18px;padding:14px;}
+.sectionhead{margin-top:10px;}
+.btn{min-height:48px;}
+@media(max-width:430px){
+ .app{max-width:none;} .topline{align-items:flex-start;} .top h1{font-size:23px;} .top p{max-width:220px;line-height:1.35;}
+ .topbutton{padding:8px 9px;font-size:11px;white-space:nowrap;}
+ main{padding-left:12px;padding-right:12px;} .metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+ .metric{padding:11px;border-radius:14px;} .metric .value{font-size:21px;}
+ .fieldgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+ .field.full{grid-column:1/-1;} .bigweight{font-size:39px;}
+ .chart{height:190px;} .nav button .ico{font-size:20px;}
+}
+@media(max-width:360px){.fieldgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.topline{gap:7px}.topbutton{font-size:10px;padding:7px}.bigweight{font-size:35px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
 </style>
 </head>
 <body>

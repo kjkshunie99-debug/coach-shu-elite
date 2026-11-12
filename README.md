@@ -1,21 +1,31 @@
-# Coach Shu Elite — Weekly Action Plan Upgrade
+# Coach Shu Elite — iPhone-friendly Light Edition
 
-## What's new
-- A weekly action plan in the Coach tab based on the most recent 7 calendar days of saved entries.
-- Weekly snapshot: days logged, average logged calories, average recorded protein, and exercise minutes.
-- Personalised action priorities for logging consistency, calorie pattern, protein, movement, side effects, and weight trend.
-- The plan refreshes when a daily entry or goal settings are saved.
-- No invented values: missing records are shown as missing and trigger a data-completion action.
+A mobile-first personal fitness, nutrition, weight-trend and accountability tracker.
 
-## Publish on GitHub Pages
-1. Extract the ZIP.
-2. Upload all files and folders inside `coach-shu-elite` to the root of your existing `coach-shu-elite` repository.
-3. Commit the changes to `main`.
-4. Keep GitHub Pages set to `main` and `/(root)`.
-5. Refresh the app. The service-worker cache version is bumped to v5.
+## Included
+- Soft lavender, white and mint-green mobile interface.
+- Responsive layout and iPhone safe-area spacing.
+- Daily weight, meals, calories, protein, water, exercise and active-calorie logging.
+- Goal planning and calorie estimates based on profile inputs.
+- Weight and calorie trend visualisations.
+- Weekly review and action-plan coaching.
+- Historical calorie records from 29 Oct–11 Nov 2026.
+- Mounjaro journal and side-effect tracking.
+- Local browser storage and JSON backup/restore tools (where available in the app).
 
-## Data storage
-The app continues using browser Local Storage under the existing key `shu_mounjaro_journey_v2`. Existing records and settings in that same browser profile should remain available. Export a JSON backup before updating as a precaution. Data is not synced to a cloud database.
+## Publish to the existing GitHub Pages repository
+1. Extract this ZIP.
+2. Open the existing `coach-shu-elite` repository.
+3. Choose **Add file → Upload files**.
+4. Upload the contents of this folder to the repository root, replacing the existing files.
+5. Commit to `main`.
+6. Keep Pages configured to `main` and `/(root)`.
+7. Open `https://kjkshunie99-debug.github.io/coach-shu-elite/` and refresh.
 
-## Important
-This is a behaviour-tracking aid, not a medical device or a substitute for a clinician/dietitian. Calorie and protein estimates are starting estimates. Do not change Mounjaro/tirzepatide dose based on app feedback. Discuss persistent side effects or inadequate intake with your prescriber.
+## Data storage and safety
+This version uses browser Local Storage, not a cloud database. Data is specific to the browser profile and device and does not automatically sync across devices. Export a JSON backup before updating or clearing browser data. Never commit personal health backups into this public repository.
+
+Calorie and protein estimates are planning estimates, not medical prescriptions. Do not use the app to independently change prescribed medication doses. Discuss persistent side effects, vomiting, dehydration, or very low intake with your clinician.
+
+## iPhone note
+The site is accessible in Chrome on iPhone. For an app-like Home Screen shortcut on iPhone, Safari's **Share → Add to Home Screen** is generally the most reliable route. iOS browsers use WebKit and may have different PWA installation behaviour from desktop/Android Chrome.
